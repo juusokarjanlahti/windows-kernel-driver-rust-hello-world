@@ -1,0 +1,22 @@
+[package]
+name = "hello-world"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+wdk = "0.2" # The official WDK crate by Microsoft
+
+[lib]
+crate-type ["cdylib"]  # This ensures we build a DLL.
+
+[profile.dev]
+panic = "abort"
+
+[profile.release]
+panic = "abort"
+
+[build]
+rustflags = ["-C", "target-feature=+crt-static"]
+
+[package.metadata.wdk.driver-model]
+driver-type = "WDM"
