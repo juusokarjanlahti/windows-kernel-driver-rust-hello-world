@@ -1,0 +1,39 @@
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample
+ClassGuid={7BA1C341-4539-11d3-B88D-00C04FAD5171}
+Provider=%ProviderString%
+PnpLockDown=1
+
+[DestinationDirs]
+DefaultDestDir=13
+
+[SourceDisksNames]
+1 = %DiskId1%,,,\
+
+[SourceDisksFiles]
+hello_world.sys = 1
+
+[Manufacturer]
+%ProviderString% = Standard,NTx86,NTamd64
+
+[Standard.NTamd64]
+%DeviceName% = Install,Root\HELLOWORLD
+
+[Install]
+CopyFiles = @hello_world.sys
+
+[Install.Services]
+AddService = hello_world,0x00000002,ServiceInstall
+
+[ServiceInstall]
+DisplayName = %DeviceName%
+ServiceType = 1
+StartType = 3
+ErrorControl = 1
+ServiceBinary = %12%\hello_world.sys
+
+[Strings]
+ProviderString = "YourCompanyName"
+DiskId1 = "Hello World Driver Installation Disk"
+DeviceName = "Hello World Driver"
